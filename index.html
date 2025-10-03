@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="MotionBridge: Dynamic Video Inbetweening with Flexible Controls.">
+  <meta name="keywords" content="MotionBridge, Video, Diffusion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MotionBridge: Dynamic Video Inbetweening with Flexible Controls</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+  
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">MotionBridge: Dynamic Video Inbetweening with Flexible Controls</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://mtanveer.com/">Maham Tanveer</a><sup>1,2</sup>,</span>
+              <a href="https://research.adobe.com/person/yang-zhou/">Yang Zhou</a><sup>2</sup>,</span>
+              <a href="https://research.adobe.com/person/simon-niklaus/">Simon Niklaus</a><sup>2</sup>,</span>
+              <a href="https://www.sfu.ca/fas/computing/people/faculty/faculty-members/amahdavi.html">Ali Mahdavi Amiri</a><sup>1</sup>,</span>
+              <a href="https://www.cs.sfu.ca/~haoz/">Hao Zhang</a><sup>1</sup>,</span>
+              <a href="https://research.adobe.com/person/krishna-kumar-singh/">Krishna Kumar Singh</a><sup>2</sup>,</span>
+              <a href="https://research.adobe.com/person/nxzhao/">Nanxuan Zhao</a><sup>2</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Simon Fraser University</span>
+            <span class="author-block"><sup>2</sup>Adobe Research</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2412.13190"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="./static/motionbridge_paper.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="./static/motionbridge_supp.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Supplementary</span>
+                </a>
+              </span>
+              <!-- <span class="link-block">
+                <a href="./static/motionbridge_1.mp4"
+                   class="external-link button is-normal is-rounded is-dark"
+                   target="_blank">
+                    <span class="icon">
+                        <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                </a>
+            </span> -->
+              <!-- Code Link. -->
+<!--               <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (coming soon)</span>
+                  </a>
+              </span> -->
+              <!-- Dataset Link. -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img id="teaser" height="100%" alt="MotionBridge" src="./static/teaser.gif"/>
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">MotionBridge: </span> Dynamic Video Inbetweening with Flexible Controls
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+            <p>By generating smooth and plausible transitions between two image frames, 
+                video inbetweening serves as a crucial tool for video editing and long video synthesis. 
+                Traditional methods often struggle to handle complex, large-scale motions. While recent advancements
+                 in video generation produce high-quality results, they frequently lack precise control over 
+                 the details of intermediate frames, which can result in outputs that deviate from creative intent.
+                  To address these challenges, we introduce <strong>MotionBridge</strong>, a unified video inbetweening
+                   framework offering flexible controls, including trajectory strokes, keyframes, masks, guide pixels,
+                    and text. Learning such diverse, multimodal controls in a unified framework poses significant 
+                    challenges. To tackle this, we design two specialized generators to faithfully extract control 
+                    signals and dual-branch embedders to resolve ambiguities in feature encoding. Additionally, 
+                    we propose a curriculum training strategy to progressively learn and integrate these various controls.</p>
+
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+
+     <!-- Paper video. -->
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Video</h2>
+      <div class="publication-video">
+        <video width="120%" autoplay muted controls>
+          <source src="./static/motionbridge_1.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </div>
+  <!--/ Paper video. -->
+</section>
+
+
+
+  <section class="section" style="display: flex; justify-content: center; align-items: center; height: auto;">
+  <div class="hero-body">
+
+    <div class="container" style="text-align: center; width: 100%; max-width: 1500px; margin-bottom: 1rem;">
+      <h2 class="title is-3 has-text-centered">Controllable Inbetweening</h2>
+      <p>We present results using motion trajectories and masks as inputs to 
+          control the in-between generation between the provided input frames.</p>
+    </div>
+    <div class="container is-max-desktop text-align: center; width: 100%; max-width: 1500px; margin-bottom: 1rem;">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div style="width: 100%; max-width: 1000px;">
+          <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+            <source src="./static/videos/01_controllable/01.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <div style="width: 100%; max-width: 1000px;">
+          <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+            <source src="./static/videos/01_controllable/02.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <div style="display: flex; width: 100%; max-width: 1200px; justify-content: space-between; align-items: center;">
+
+          <div style="width: 25%; display: flex; justify-content: center;">
+            <video style="height: 30%; object-fit: cover;">
+              <source src="./static/videos/01_controllable/17_0.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        
+          <div style="width: 25%; display: flex; justify-content: center;">
+            <video controls autoplay muted loop style="height: 100%; object-fit: cover;">
+              <source src="./static/videos/01_controllable/17_1.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        
+          <div style="width: 25%; display: flex; justify-content: center;">
+            <video controls autoplay muted loop style="height: 100%; object-fit: cover;">
+              <source src="./static/videos/01_controllable/17_2.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        
+          <div style="width: 25%; display: flex; justify-content: center;">
+            <video controls autoplay muted loop style="height: 100%; object-fit: cover;">
+              <source src="./static/videos/01_controllable/17_3.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          
+        </div>
+
+        <div style="width: 100%; max-width: 1000px;">
+          <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+            <source src="./static/videos/01_controllable/04.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <div style="width: 100%;">
+          <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+            <source src="./static/videos/01_controllable/06.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      
+        <div style="width: 100%;">
+          <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+            <source src="./static/videos/01_controllable/07.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <div style="width: 100%;">
+          <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+            <source src="./static/videos/01_controllable/09.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      
+        <div style="width: 100%;">
+          <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+            <source src="./static/videos/01_controllable/16.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <div style="width: 100%;">
+          <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+            <source src="./static/videos/01_controllable/13.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      
+        <div style="width: 100%;">
+          <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+            <source src="./static/videos/01_controllable/15.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <div style="width: 100%;">
+          <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+            <source src="./static/videos/01_controllable/14.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  <section class="section" style="display: flex; justify-content: center; align-items: center; height: auto;">
+    <div class="hero-body">
+      <div class="container" style="text-align: center; width: 100%; max-width: 1500px; margin-bottom: 1rem;">
+        <h2 class="title is-3 has-text-centered">Controllable Inbetweening: With Masks</h2>
+        <p>Using masks allows for greater control over generation. In these examples, 
+          the red mask indicates static regions, while the blue mask highlights areas of 
+          dynamic motion. The static mask ensures that specified regions remain stable 
+          while still adhering to the conditions of the last frame. Whereas, dynamic 
+          masks define areas of movement, providing more precise control over motion.</p>
+      </div>
+      <div class="container is-max-desktop text-align: center; width: 100%; max-width: 1500px; margin-bottom: 1rem;">
+        <div id="results-carousel" class="carousel results-carousel">
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/01_controllable/03.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+  
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/01_controllable/05.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+  
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/01_controllable/11.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+  
+          <div style="width: 100%;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/01_controllable/08.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        
+          <div style="width: 100%;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/01_controllable/10.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" style="display: flex; justify-content: center; align-items: center; height: auto;">
+    <div class="hero-body">
+      <div class="container" style="text-align: center; width: 100%; max-width: 1500px; margin-bottom: 1rem;">
+        <h2 class="title is-3 has-text-centered">Seamless Looping</h2>
+        <p>Our model enables seamless looping video generation. With identical input frames, it creates smooth loops that follow 
+          motion trajectories, ideal for digital art, virtual environments, and background animations.</p>
+      </div>
+      <div class="container is-max-desktop text-align: center; width: 100%; max-width: 1000px; margin-bottom: 1rem;">
+        <div id="results-carousel" class="carousel results-carousel">
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/04_loop/01.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+  
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/04_loop/03.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+  
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/04_loop/02.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+  
+          <div style="width: 100%;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/04_loop/04.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>  
+
+          <div style="width: 100%;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/04_loop/05.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <section class="section" style="display: flex; justify-content: center; align-items: center; height: auto;">
+    <div class="hero-body">
+      <div class="container" style="text-align: center; width: 100%; max-width: 1500px; margin-bottom: 1rem;">
+        <h2 class="title is-3 has-text-centered">Refining T2V Outputs</h2>
+        <p>Basic Text-to-Video (T2V) models rely solely on text for control, 
+            which often falls short for detailed or larger motions, leading to
+             undesired outputs. We demonstrate results in refining T2V outputs, 
+             enhancing control.</p>
+            <hr>
+      </div>
+      <div class="container is-max-desktop text-align: center; width: 100%; max-width: 1000px; margin-bottom: 1rem;">
+        <div id="results-carousel" class="carousel results-carousel">
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/05_t2v/01.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+  
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/05_t2v/02.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+  
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/05_t2v/03.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          
+          </div>  
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="section" style="display: flex; justify-content: center; align-items: center; height: auto;">
+    <div class="hero-body">
+      <div class="container" style="text-align: center; width: 100%; max-width: 1500px; margin-bottom: 1rem;">
+        <h2 class="title is-3 has-text-centered">Image Deformation</h2>
+        <p>Given two input frames of the same object from different 
+            camera locations, we use automatic motion extraction via optical 
+            flow to generate the inbetween frames.</p>
+            <hr>
+      </div>
+      <div class="container is-max-desktop text-align: center; width: 100%; max-width: 1000px; margin-bottom: 1rem;">
+        <div id="results-carousel" class="carousel results-carousel">
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/06_deformation/01.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+  
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/06_deformation/03.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+  
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/06_deformation/02.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="section" style="display: flex; justify-content: center; align-items: center; height: auto;">
+    <div class="hero-body">
+      <div class="container" style="text-align: center; width: 100%; max-width: 1500px; margin-bottom: 1rem;">
+        <h2 class="title is-3 has-text-centered">Camera Motion Generation</h2>
+        <p>Here we show some results by using trajectories and masks as inputs 
+            to control the inbteweening generation between the given input frames.</p>
+            <hr>
+      </div>
+      <div class="container is-max-desktop text-align: center; width: 100%; max-width: 1000px; margin-bottom: 1rem;">
+        <div id="results-carousel" class="carousel results-carousel">
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/07_camera/01.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+  
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/07_camera/03.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+  
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/07_camera/02.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="section" style="display: flex; justify-content: center; align-items: center; height: auto;">
+    <div class="hero-body">
+      <div class="container" style="text-align: center; width: 100%; max-width: 1500px; margin-bottom: 1rem;">
+        <h2 class="title is-3 has-text-centered">Guide Pixel Generation</h2>
+        <p>Example results using guide pixels for control: specific pixels are placed in target regions of the final frames.</p>
+            <hr>
+      </div>
+      <div class="container is-max-desktop text-align: center; width: 100%; max-width: 1000px; margin-bottom: 1rem;">
+        <div id="results-carousel" class="carousel results-carousel">
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/08_guide/01.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+  
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/08_guide/02.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="display: flex; justify-content: center; align-items: center; height: auto;">
+    <div class="hero-body">
+      <div class="container" style="text-align: center; width: 100%; max-width: 1500px; margin-bottom: 1rem;">
+        <h2 class="title is-3 has-text-centered">Image Animation</h2>
+        <p>Our model also animates single images by generating plausible motions given trajectories, enabling applications 
+            like bringing static images to life and enhancing storytelling.</p>
+            <hr>
+      </div>
+      <div class="container is-max-desktop text-align: center; width: 100%; max-width: 1000px; margin-bottom: 1rem;">
+        <div id="results-carousel" class="carousel results-carousel">
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/09_image/02.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/09_image/03.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+  
+
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/09_image/04.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+      
+
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/09_image/01.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" style="display: flex; justify-content: center; align-items: center; height: auto;">
+    <div class="hero-body">
+      <div class="container" style="text-align: center; width: 100%; max-width: 1500px; margin-bottom: 1rem;">
+        <h2 class="title is-3 has-text-centered">Comparison to Baseline</h2>
+        <p>We compare our model to baselines also demonstrating its enhanced control 
+            and ability to generate coherent motion.</p>
+            <hr>
+      </div>
+      <div class="container is-max-desktop text-align: center; width: 100%; max-width: 1000px; margin-bottom: 1rem;">
+        <div id="results-carousel" class="carousel results-carousel">
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/02_baseline/01.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/02_baseline/02.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+  
+
+          <div style="width: 100%; max-width: 1000px;">
+            <video controls autoplay muted loop style="width: 100%; object-fit: cover;">
+              <source src="./static/videos/02_baseline/03.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+      
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    
+    <pre><code>@misc{tanveer2024motionbridgedynamicvideoinbetweening,
+      title={MotionBridge: Dynamic Video Inbetweening with Flexible Controls}, 
+      author={Maham Tanveer and Yang Zhou and Simon Niklaus and Ali Mahdavi Amiri and Hao Zhang and Krishna Kumar Singh and Nanxuan Zhao},
+      year={2024},
+      url={https://arxiv.org/abs/2412.13190}}
+    </code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            Website source code based on the source code of  <a rel="license"
+            href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
